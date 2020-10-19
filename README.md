@@ -1,2 +1,2 @@
 # jsoncrypt
-Read/write password-encrypted json files
+Store JSON-serializable data in password-encrypted files.
