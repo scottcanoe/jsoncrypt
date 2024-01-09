@@ -1,6 +1,8 @@
-# Wing files
-*.wpr
-*.wpu
+# Pycharm project files and .venc
+*.idea/
+
+# Temporary files used for testing
+#.tmp/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

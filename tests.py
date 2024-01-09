@@ -1,14 +1,9 @@
 """
-
+Some minimal tests. Fill out later if needed.
 """
-import base64
-import getpass
-import json
-import os
-from pathlib import Path
-import shutil
-from typing import Optional, Union
 
+import shutil
+from pathlib import Path
 
 
 def get_temp_dir(recreate: bool = False):
@@ -20,7 +15,6 @@ def get_temp_dir(recreate: bool = False):
     return p
         
 
-
 def test_dump_and_load():
     
     from jsoncrypt import dump, load
@@ -31,12 +25,11 @@ def test_dump_and_load():
     
     a = {
         "domain" : "DOMAIN",
-        "url" : "www.example.com",
-        "username" : "fred",
-        "password" : "abc123LOL",
+        "url": "www.example.com",
+        "username": "fred",
+        "password": "abc123LOL",
     }
-    
-    
+
     dump(datadir / 'a', test_password, a)
     b = load(datadir / 'a', test_password)
     
@@ -46,5 +39,6 @@ def test_dump_and_load():
     assert a == b == c
 
 
-
+if __name__ == "__main__":
+    test_dump_and_load()
 
