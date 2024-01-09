@@ -2,7 +2,8 @@
 
 **jsoncrypt** is a small module I created for use with another project. Basically,
 it lets you easily dump a dictionary into an encrypted, password-protected file
-which can later be loaded again using the same password.
+which can later be loaded again using the same password. The only
+dependency is [cryptography](https://github.com/pyca/cryptography).
 
 ### Example:
 ```python
