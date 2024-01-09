@@ -22,16 +22,16 @@ __all__ = [
     "load",
 ]
 
-                        
-def genkey(
-    password: Union[bytes, str],
-    salt: bytes,
-    ) -> bytes:
-    
-    """
-    Generate a key derived from a password and salt.
-    """
 
+                        
+def genkey(password: Union[bytes, str], salt: bytes) -> bytes:
+    """
+    Generate a key.
+
+    :param password:
+    :param salt:
+
+    """
     if isinstance(password, str):
         password = password.encode()
         
@@ -49,19 +49,21 @@ def genkey(
 def gensalt(length: int = 16) -> bytes:
     """
     Generate a salt. Default length is 16 bytes.
+
+    :param length: length of the salt. Default length is 16 bytes.
+    :returns the salt.
     """
     return os.urandom(length)
 
 
+def can_access(path: PathLike, password: Union[bytes, str]) -> bool:
+    """
+    Check whether a password works on a file.
 
-def can_access(path: PathLike,
-               password: Union[bytes, str],
-               ) -> bool:
-    
+    :param path: File to check password with.
+    :param password: Password.
+    :returns the salt.
     """
-    Check whether password works on file.
-    """
-    
     with open(path, 'rb') as f:
 
         # Read encrypted data key.
@@ -82,14 +84,13 @@ def can_access(path: PathLike,
         return True
     except InvalidToken:
         return False
-        
 
 
-def dump(path: PathLike,
-         password: Union[bytes, str],
-         data: dict,         
-         ) -> None:
-
+def dump(
+    path: PathLike,
+    password: Union[bytes, str],
+    data: dict,
+) -> None:
     """
     Store a JSON-serializable dictionary as a password-encrypted file.
     
@@ -136,10 +137,10 @@ def dump(path: PathLike,
         f.write(bts_e)
     
 
-
-def load(path: PathLike,
-         password: Union[bytes, str],
-         ) -> None:
+def load(path: PathLike, password: Union[bytes, str]) -> None:
+    """
+    Load data from password-protected JSON file.
+    """
         
     with open(path, 'rb') as f:
 
@@ -158,7 +159,8 @@ def load(path: PathLike,
     login_key = genkey(password, salt)
     login_cipher = Fernet(login_key)
     
-    # Decrypt encrypted data key with login cipher, and use it to create a data cipher.
+    # Decrypt encrypted data key with login cipher, and use it to create
+    # a data cipher.
     try:
         data_key = login_cipher.decrypt(key_e)
     except InvalidToken:

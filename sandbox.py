@@ -33,3 +33,4 @@ def password_prompt(confirm: bool = False) -> str:
 
     return pw
 
+password = password_prompt()
